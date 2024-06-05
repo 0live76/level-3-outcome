@@ -4,6 +4,8 @@
 
 <nav>
   <a href="/" class:current-page={$page.url.pathname.includes("/")}>Home</a>
+  <a href="history" class:current-page={$page.url.pathname.includes("history")}>Order History</a>
+  <a href="forum" class:current-page={$page.url.pathname.includes("forum")}>Forum</a>
   <a href="help" class:current-page={$page.url.pathname.includes("help")}>Help</a>
   <a href="contactUs" class:current-page={$page.url.pathname.includes("contactUs")}>Contact Us</a>
 </nav>

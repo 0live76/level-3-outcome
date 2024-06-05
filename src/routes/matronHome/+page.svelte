@@ -1,6 +1,7 @@
 <script>
-  import Header from "$lib/Header2.svelte"
+  import Header from "$lib/Header.svelte"
   import Footer from "$lib/Footer.svelte"
+  let user = "matron"
 </script>
 
 <main class="columns">
@@ -43,7 +44,7 @@
     margin-left: 20%;
     margin-top: 5%;
     padding: 2%;
-    height: 50%;
+    height: 70%;
     border-radius: 10px;
   }
   h4 {
@@ -66,14 +67,14 @@
   .cancel {
     background-color: #b63737;
     color: white;
-    font-size: 150%;
+    font-size: 130%;
     padding: 2%;
     border-radius: 15px;
   }
   .confirm {
     background-color: #003f2c;
     color: white;
-    font-size: 150%;
+    font-size: 130%;
     padding: 2%;
     border-radius: 15px;
   }
