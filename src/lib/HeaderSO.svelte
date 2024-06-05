@@ -7,9 +7,9 @@
   <h1>Grocery App</h1>
   <h2>Please sign in to view list</h2>
   <div>
-    <a href="matron">Sign in as Matron</a>
-    <a href="student">Sign in as Student</a>
-    <a href="caterer">Sign in as Caterer</a>
+    <a href="matronHome">Sign in as Matron</a>
+    <a href="studentHome">Sign in as Student</a>
+    <a href="catererHome">Sign in as Caterer</a>
   </div>
 </header>
 
