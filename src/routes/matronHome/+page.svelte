@@ -1,7 +1,6 @@
 <script>
-  import Header from "$lib/Header.svelte"
-  import Footer from "$lib/Footer.svelte"
-  let user = "matron"
+  import Header from "$lib/Header2.svelte"
+  import Footer from "$lib/Footer2.svelte"
 </script>
 
 <main class="columns">

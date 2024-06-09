@@ -1,9 +1,16 @@
 <script>
   import Nav from "$lib/Nav.svelte"
+  import Nav2 from "$lib/Nav2.svelte"
+  import { isSignedIn } from "$lib/stores"
 </script>
 
 <header class="column is-one-third">
-  <Nav />
+  {#if isSignedIn == false}
+    <Nav />
+  {:else}
+    <Nav2 />
+  {/if}
+
   <h1>Grocery App</h1>
   <h2>Please sign in to view list</h2>
   <div>

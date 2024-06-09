@@ -1,9 +1,9 @@
 <script>
-  import Nav from "$lib/Nav2.svelte"
+  import Nav2 from "$lib/Nav2.svelte"
 </script>
 
 <header class="column is-one-third">
-  <Nav />
+  <Nav2 />
   <h1>Craighead Diocesan School</h1>
   <h2>Year 13 Grocery List</h2>
   <div>
