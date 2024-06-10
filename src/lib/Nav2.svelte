@@ -1,10 +1,15 @@
 <script>
   import { page } from "$app/stores"
+  import { user } from "$lib/stores"
 </script>
 
 <nav>
   <a href="/" class:current-page={$page.url.pathname.includes("/")}>Home</a>
-  <a href="history" class:current-page={$page.url.pathname.includes("history")}>Order History</a>
+  {#if $user == "Student"}
+    <a href="forum" class:current-page={$page.url.pathname.includes("forum")}>Forum</a>
+  {:else}
+    <a href="history" class:current-page={$page.url.pathname.includes("history")}>Order History</a>
+  {/if}
   <a href="help" class:current-page={$page.url.pathname.includes("help")}>Help</a>
   <a href="contactUs" class:current-page={$page.url.pathname.includes("contactUs")}>Contact Us</a>
 </nav>

@@ -1,5 +1,9 @@
 <script>
   import Nav2 from "$lib/Nav2.svelte"
+  import { user } from "$lib/stores"
+  function signOut() {
+    user = "signedOut"
+  }
 </script>
 
 <header class="column is-one-third">
@@ -8,7 +12,7 @@
   <h2>Year 13 Grocery List</h2>
   <div>
     <img src="userIcon.png" alt="" />
-    <p>Sign Out -</p>
+    <a on:click={signOut} href="/">Sign Out - {$user}</a>
   </div>
 </header>
 
@@ -37,12 +41,15 @@
     color: white;
   }
 
-  p {
+  a {
     color: white;
     font-family: "DM Sans", sans-serif;
     font-size: 170%;
     padding-left: 3%;
     padding-top: 2%;
+  }
+  a:hover {
+    font-style: italic;
   }
   div {
     display: flex;
