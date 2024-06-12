@@ -3,6 +3,17 @@
   import Footer from "$lib/Footer.svelte"
 </script>
 
-<Header />
-
+<main class="columns">
+  <Header />
+  <h3>Order History</h3>
+</main>
 <Footer />
+
+<style>
+  h3 {
+    font-weight: bold;
+    font-size: 170%;
+    color: #000;
+    margin: 3%;
+  }
+</style>
