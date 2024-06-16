@@ -3,7 +3,6 @@
 </script>
 
 <div class="column">
-  <h3>Order Status:</h3>
   <div class="list">
     <h4>Current List</h4>
     <h5>Date:</h5>
@@ -25,13 +24,6 @@
 </div>
 
 <style>
-  h3 {
-    text-align: center;
-    font-weight: bold;
-    font-size: 170%;
-    padding-top: 3%;
-    color: #000;
-  }
   .list {
     box-shadow: 2px 2px 10px;
     width: 60%;

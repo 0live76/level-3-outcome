@@ -24,26 +24,22 @@
 
 <style>
   .collapsible {
-    border-bottom: 1px solid var(--gray-light, #eee);
-  }
-
-  h3 {
-    margin: 0;
+    background-color: none;
   }
 
   button {
-    background-color: var(--background, #fff);
+    background-color: rgb(243, 243, 243);
     color: var(--gray-darkest, #282828);
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 2%;
+    padding: 3%;
     border: none;
-    margin: 0;
-    padding: 1em 0.5em;
-  }
-
-  button[aria-expanded="true"] {
-    border-bottom: 1px solid var(--gray-light, #eee);
+    font-size: 110%;
+    font-family: "DM Sans", sans-serif;
+    border-radius: 4px;
+    box-shadow: 1px 1px 3px;
   }
 
   button[aria-expanded="true"] .vert {
