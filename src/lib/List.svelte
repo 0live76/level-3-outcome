@@ -1,18 +1,23 @@
 <script>
   import { user } from "$lib/stores"
+  let items = []
+  let item
 </script>
 
 <div class="column">
   <div class="list">
     <h4>Current List</h4>
     <h5>Date:</h5>
-    <ul>
-      <li>This</li>
-      <li>Is</li>
-      <li>Placeholder</li>
-      <li>Text</li>
-    </ul>
+    <p>
+      {#each items as item}
+        <li>{item}</li>
+      {/each}
+    </p>
   </div>
+  <p class="userInput">
+    Add an Item:
+    <input bind:value={item} />
+  </p>
   <div class="menu">
     {#if $user == "Matron"}
       <button class="cancel">Cancel Order</button>
@@ -41,11 +46,14 @@
   h5 {
     font-size: 160%;
   }
+  .userInput {
+    text-align: center;
+    padding: 4%;
+  }
   .menu {
     display: flex;
     align-content: center;
     justify-content: space-around;
-    padding-top: 4%;
   }
 
   .cancel {

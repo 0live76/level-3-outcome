@@ -11,9 +11,9 @@
   <h1>Grocery App</h1>
   <h2>Please sign in to view list</h2>
   <div>
-    <a on:click={SignIn} href="matronHome">Sign in as Matron</a>
-    <a on:click={SignIn} href="studentHome">Sign in as Student</a>
-    <a on:click={SignIn} href="catererHome">Sign in as Caterer</a>
+    <a on:click={SignIn} href="MatronHome">Sign in as Matron</a>
+    <a on:click={SignIn} href="StudentHome">Sign in as Student</a>
+    <a on:click={SignIn} href="CatererHome">Sign in as Caterer</a>
   </div>
 </header>
 

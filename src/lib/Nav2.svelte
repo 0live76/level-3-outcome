@@ -4,7 +4,7 @@
 </script>
 
 <nav>
-  <a href="/" class:current-page={$page.url.pathname.includes("/")}>Home</a>
+  <a href={$user + "Home"} class:current-page={$page.url.pathname.includes("/")}>Home</a>
   {#if $user == "Student"}
     <a href="forum" class:current-page={$page.url.pathname.includes("forum")}>Forum</a>
   {:else}
@@ -29,6 +29,7 @@
   a:hover {
     text-decoration: underline;
     font-weight: bolder;
+    color: white;
   }
   .current-page {
     text-decoration: underline;
