@@ -1,31 +1,26 @@
 <script>
-  import { user } from "$lib/stores"
-  let items = []
+  import { items } from "$lib/stores"
   let item
+  function addItem() {
+    item = { name: item }
+    items = [...items, item]
+  }
 </script>
 
 <div class="column">
   <div class="list">
     <h4>Current List</h4>
+    <button on:click={addItem}>Add Item</button>
+
     <h5>Date:</h5>
     <p>
-      {#each items as item}
-        <li>{item}</li>
-      {/each}
+      {$items[0].name}
     </p>
   </div>
   <p class="userInput">
     Add an Item:
     <input bind:value={item} />
   </p>
-  <div class="menu">
-    {#if $user == "Matron"}
-      <button class="cancel">Cancel Order</button>
-    {:else if $user == "Student"}
-      <button class="cancel">Cancel Order</button>
-    {/if}
-    <button class="confirm">Confirm Order</button>
-  </div>
 </div>
 
 <style>
@@ -50,7 +45,7 @@
     text-align: center;
     padding: 4%;
   }
-  .menu {
+  /* .menu {
     display: flex;
     align-content: center;
     justify-content: space-around;
@@ -69,5 +64,5 @@
     font-size: 130%;
     padding: 2%;
     border-radius: 15px;
-  }
+  } */
 </style>
