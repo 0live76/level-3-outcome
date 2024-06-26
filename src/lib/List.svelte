@@ -2,8 +2,11 @@
   import { items } from "$lib/stores"
   let item
   function addItem() {
-    item = { name: item }
-    items = [...items, item]
+    let newItem = { name: item }
+    $items = [...$items, newItem]
+  }
+  function removeItem(index) {
+    $items = [...$items.slice(0, index), ...$items.slice(index + 1)]
   }
 </script>
 
@@ -13,10 +16,20 @@
     <button on:click={addItem}>Add Item</button>
 
     <h5>Date:</h5>
-    <p>
-      {$items[0].name}
-    </p>
+    <div class="column">
+      {#each $items as item, index}
+        <p class="listItems">
+          <li>{item.name}</li>
+          <button
+            on:click={() => {
+              removeItem(index)
+            }}>🗑</button
+          >
+        </p>
+      {/each}
+    </div>
   </div>
+
   <p class="userInput">
     Add an Item:
     <input bind:value={item} />
@@ -45,6 +58,12 @@
     text-align: center;
     padding: 4%;
   }
+
+  .listItems {
+    display: flex;
+    justify-content: space-between;
+  }
+
   /* .menu {
     display: flex;
     align-content: center;
