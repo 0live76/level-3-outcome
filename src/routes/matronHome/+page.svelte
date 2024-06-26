@@ -8,7 +8,9 @@
 
 <main class="columns">
   <Header />
-  <List />
+  <div class="column">
+    <List />
+  </div>
 </main>
 
 <Footer />
