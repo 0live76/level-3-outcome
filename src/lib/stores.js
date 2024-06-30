@@ -10,5 +10,8 @@ export const items = writable([
 ])
 
 
+export const statuses = writable([
+    "Ordering", "Moderating", "Catering", "Ready for Pick-Up"
+])
 
 
