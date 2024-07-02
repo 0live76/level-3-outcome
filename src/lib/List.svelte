@@ -2,14 +2,48 @@
   import { items } from "$lib/stores"
   import { user } from "$lib/stores"
   import { orderStatus } from "$lib/stores"
+  import { tooMany } from "$lib/stores"
+  import { quantity } from "$lib/stores"
+  import { orderComplete } from "$lib/stores"
+  import { maxNumber } from "$lib/stores"
+  import { errorMessage } from "$lib/stores"
 
   let item
   function addItem() {
+    maxItems()
+    $quantity = $quantity + 1
     let newItem = { name: item }
     $items = [...$items, newItem]
   }
+  function maxItems() {
+    if ($quantity > $maxNumber - 2) {
+      $tooMany = true
+      $errorMessage = "You can only add up to 5 items"
+    } else {
+      $tooMany = false
+      $errorMessage = ""
+    }
+  }
   function removeItem(index) {
+    $quantity = $quantity - 2
+    maxItems()
     $items = [...$items.slice(0, index), ...$items.slice(index + 1)]
+  }
+  function cancelList() {
+    $items = []
+    $orderStatus = "Ordering"
+  }
+  function confirmList() {
+    $orderComplete = true
+    if ($user == "Student") {
+      $orderStatus = "Moderating"
+    }
+    if ($user == "Matron") {
+      $orderStatus = "Catering"
+    }
+    if ($user == "Caterer") {
+      $orderStatus = "Ready for Pick-Up"
+    }
   }
 </script>
 
@@ -22,6 +56,7 @@
       <p class="listItems">
         <li>{item.name}</li>
         <button
+          class="itemButton"
           on:click={() => {
             removeItem(index)
           }}>🗑</button
@@ -32,17 +67,18 @@
   <p class="addItemBox">
     Add an Item:
     <input bind:value={item} />
-    <button class="itemAddButton" on:click={addItem}>✅</button>
+    <button class="itemButton" on:click={addItem} disabled={$tooMany}>✅</button>
   </p>
+  <p>{$errorMessage}</p>
 </main>
 <div class="menu">
   {#if $user == "Student"}
-    <p class="cancel">Cancel Order</p>
+    <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
   {/if}
   {#if $user == "Matron"}
-    <p class="cancel">Cancel Order</p>
+    <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
   {/if}
-  <p class="confirm">Confirm Order</p>
+  <button class="CCbutton confirm" on:click={confirmList} disabled={$orderComplete}>Confirm Order</button>
 </div>
 
 <style>
@@ -52,6 +88,12 @@
     align-items: center;
     gap: 3rem;
     font-family: "DM Sans" sans-serif;
+  }
+  p {
+    font-family: "DM Sans" sans-serif;
+    color: #000;
+    font-style: italic;
+    font-size: 110%;
   }
   .status {
     font-weight: bold;
@@ -72,6 +114,7 @@
     font-size: 120%;
     color: #000;
     margin-top: 2%;
+    font-style: normal;
   }
   .addItemBox {
     font-size: 120%;
@@ -85,7 +128,7 @@
   h5 {
     font-size: 150%;
   }
-  .itemAddButton {
+  .itemButton {
     border: none;
     font-size: 120%;
     background-color: white;
@@ -95,20 +138,18 @@
     align-content: center;
     justify-content: space-evenly;
     margin-top: 5%;
-    color: white;
-    font-size: 120%;
   }
 
-  .cancel {
+  .CCbutton {
+    font-size: 120%;
+    color: white;
     background-color: #b63737;
+    border: none;
     padding: 1.5%;
     border-radius: 10px;
     box-shadow: 6px 8px 13px -4px rgba(170, 170, 170, 1);
   }
   .confirm {
     background-color: #003f2c;
-    padding: 1.5%;
-    border-radius: 10px;
-    box-shadow: 6px 8px 13px -4px rgba(170, 170, 170, 1);
   }
 </style>
