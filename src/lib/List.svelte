@@ -7,11 +7,16 @@
   import { orderComplete } from "$lib/stores"
   import { maxNumber } from "$lib/stores"
   import { errorMessage } from "$lib/stores"
-
+  let emptyList = true
   let item
+  $: if (quantity < 0) {
+    emptyList = true
+    count = 0
+  }
   function addItem() {
     maxItems()
     $quantity = $quantity + 1
+    emptyList = false
     let newItem = { name: item }
     $items = [...$items, newItem]
   }
@@ -31,11 +36,12 @@
   }
   function cancelList() {
     $items = []
+    $quantity = 0
     $orderStatus = "Ordering"
   }
   function confirmList() {
-    $orderComplete = true
     if ($user == "Student") {
+      $orderComplete = true
       $orderStatus = "Moderating"
     }
     if ($user == "Matron") {
@@ -78,7 +84,7 @@
   {#if $user == "Matron"}
     <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
   {/if}
-  <button class="CCbutton confirm" on:click={confirmList} disabled={$orderComplete}>Confirm Order</button>
+  <button class="CCbutton confirm" on:click={confirmList} disabled={$orderComplete && emptyList}>Confirm Order</button>
 </div>
 
 <style>
