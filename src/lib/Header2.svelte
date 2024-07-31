@@ -2,11 +2,6 @@
   import Nav2 from "$lib/Nav2.svelte"
   import { user } from "$lib/stores"
   import { isSignedIn } from "$lib/stores"
-
-  function signOut() {
-    user = "signedOut"
-    $isSignedIn = false
-  }
 </script>
 
 <header class="column is-one-third">

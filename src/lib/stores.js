@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store'
+import { getlistItems } from "$lib/db.js"
 
 
 export const user = writable("signedOut")
@@ -12,9 +13,7 @@ export const errorMessage = writable(" ")
 
 
 
-export const items = writable([
-    
-])
+export const items = writable([])
 
 
 export const statuses = writable([

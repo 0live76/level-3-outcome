@@ -1,79 +1,44 @@
 <script>
-  import { items } from "$lib/stores"
+  // import { items } from "$lib/stores"
   import { user } from "$lib/stores"
   import { orderStatus } from "$lib/stores"
-  import { tooMany } from "$lib/stores"
+  import { tooMany as isError } from "$lib/stores"
   import { quantity } from "$lib/stores"
   import { orderComplete } from "$lib/stores"
   import { maxNumber } from "$lib/stores"
   import { errorMessage } from "$lib/stores"
-  let emptyList = true
-  let item
-  $: if (quantity < 0) {
-    emptyList = true
-    count = 0
-  }
-  function addItem() {
-    maxItems()
-    $quantity = $quantity + 1
-    emptyList = false
-    let newItem = { name: item }
-    $items = [...$items, newItem]
-  }
-  function maxItems() {
-    if ($quantity > $maxNumber - 2) {
-      $tooMany = true
-      $errorMessage = "You can only add up to 5 items"
-    } else {
-      $tooMany = false
-      $errorMessage = ""
-    }
-  }
-  function removeItem(index) {
-    $quantity = $quantity - 2
-    maxItems()
-    $items = [...$items.slice(0, index), ...$items.slice(index + 1)]
-  }
-  function cancelList() {
-    $items = []
-    $quantity = 0
-    $orderStatus = "Ordering"
-  }
-  function confirmList() {
-    if ($user == "Student") {
-      $orderComplete = true
-      $orderStatus = "Moderating"
-    }
-    if ($user == "Matron") {
-      $orderStatus = "Catering"
-    }
-    if ($user == "Caterer") {
-      $orderStatus = "Ready for Pick-Up"
-    }
-  }
+  import { getlistItems } from "$lib/db.js"
 </script>
 
 <p class="status">Order Status: {$orderStatus}</p>
 <main>
   <div class="listElement">
     <h4>Current List</h4>
-    <h5>Date:</h5>
-    {#each $items as item, index}
-      <p class="listItems">
-        <li>{item.name}</li>
-        <button
-          class="itemButton"
-          on:click={() => {
-            removeItem(index)
-          }}>🗑</button
-        >
-      </p>
-    {/each}
+    <h5>
+      Date: {currentDate}
+    </h5>
+    {#await items}
+      <p>Loading...</p>
+    {:then items}
+      {#each items as item, index}
+        <p>{item.name}</p>
+
+        <!-- <p class="listItems">
+          <li>{item.name}</li>
+          <button
+            class="itemButton"
+            on:click={() => {
+              removeItem(index)
+            }}>🗑</button
+          >
+        </p> -->
+      {/each}
+    {/await}
   </div>
   <p class="addItemBox">
     Add an Item:
-    <input bind:value={item} />
-    <button class="itemButton" on:click={addItem} disabled={$tooMany}>✅</button>
+    <input bind:value={addedItem} />
+    <button class="itemButton" on:click={addItem} disabled={$isError}>✅</button>
   </p>
   <p>{$errorMessage}</p>
 </main>
@@ -84,7 +49,7 @@
   {#if $user == "Matron"}
     <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
   {/if}
-  <button class="CCbutton confirm" on:click={confirmList} disabled={$orderComplete && emptyList}>Confirm Order</button>
+  <button class="CCbutton confirm" on:click={confirmList}>Confirm Order</button>
 </div>
 
 <style>
