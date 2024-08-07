@@ -8,20 +8,25 @@
   import { maxNumber } from "$lib/stores"
   import { errorMessage } from "$lib/stores"
   import { getlistItems } from "$lib/db.js"
+
+  let list = getlistItems()
+
+  let addedItem = ""
 </script>
 
-<p class="status">Order Status: {$orderStatus}</p>
+<!-- <p class="status">Order Status: {$orderStatus}</p> -->
 <main>
   <div class="listElement">
     <h4>Current List</h4>
     <h5>
-      Date: {currentDate}
+      <!-- Date: {currentDate} -->
     </h5>
-    {#await items}
+    {#await list}
       <p>Loading...</p>
-    {:then items}
-      {#each items as item, index}
-        <p>{item.name}</p>
+    {:then list}
+      {list}
+      {#each list as item, index}
+        <p>{item}</p>
 
         <!-- <p class="listItems">
           <li>{item.name}</li>
@@ -35,14 +40,15 @@
       {/each}
     {/await}
   </div>
-  <p class="addItemBox">
+  <!-- <p class="addItemBox">
     Add an Item:
     <input bind:value={addedItem} />
     <button class="itemButton" on:click={addItem} disabled={$isError}>✅</button>
-  </p>
-  <p>{$errorMessage}</p>
+  </p> -->
+  <!-- <p>{$errorMessage}</p> -->
 </main>
-<div class="menu">
+
+<!-- <div class="menu">
   {#if $user == "Student"}
     <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
   {/if}
@@ -50,7 +56,7 @@
     <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
   {/if}
   <button class="CCbutton confirm" on:click={confirmList}>Confirm Order</button>
-</div>
+</div> -->
 
 <style>
   main {

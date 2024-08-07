@@ -10,7 +10,7 @@
   <h2>Year 13 Grocery List</h2>
   <div>
     <img src="userIcon.png" alt="" />
-    <a on:click={signOut} href="/">Sign Out - {$user}</a>
+    <!-- <a on:click={signOut} href="/">Sign Out - {$user}</a> -->
   </div>
 </header>
 

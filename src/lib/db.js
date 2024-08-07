@@ -21,15 +21,17 @@ const db = getFirestore(app)
 import { doc, getDoc } from "firebase/firestore";
 
 export async function getlistItems() {
-  const docRef = doc(db, "list", "24");
-  const docSnap = await getDoc(docRef);
+  let lists = []
+  
+  const listsDocs = await getDocs(collection(db, 'list'))
+  
+  listsDocs.forEach( (listDoc) => {
+    lists.push(listDoc.data())
+  })
 
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-  } else {
-    // docSnap.data() will be undefined in this case
-    console.log("No such document!");
-  }
+  console.dir(lists)
+
+  return lists[0].list
 }
 
 // export async function getlistItems2() {
