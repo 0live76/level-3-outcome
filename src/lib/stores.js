@@ -11,9 +11,9 @@ export const orderComplete = writable(false)
 export const maxNumber = writable(5)
 export const errorMessage = writable(" ")
 
+// let list = getlistItems()
 
-
-export const items = writable([])
+export const list = writable([])
 
 
 export const statuses = writable([

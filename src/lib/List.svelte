@@ -1,5 +1,5 @@
 <script>
-  // import { items } from "$lib/stores"
+  import { list } from "$lib/stores"
   import { user } from "$lib/stores"
   import { orderStatus } from "$lib/stores"
   import { tooMany as isError } from "$lib/stores"
@@ -8,10 +8,10 @@
   import { maxNumber } from "$lib/stores"
   import { errorMessage } from "$lib/stores"
   import { getlistItems } from "$lib/db.js"
-
-  let list = getlistItems()
-
-  let addedItem = ""
+  $list = getlistItems()
+  function removeItem(itemToRemove) {
+    $list = $list.filter((listItem) => listItem != itemToRemove)
+  }
 </script>
 
 <!-- <p class="status">Order Status: {$orderStatus}</p> -->
@@ -21,22 +21,19 @@
     <h5>
       <!-- Date: {currentDate} -->
     </h5>
-    {#await list}
+    {#await $list}
       <p>Loading...</p>
-    {:then list}
-      {list}
-      {#each list as item, index}
-        <p>{item}</p>
-
-        <!-- <p class="listItems">
-          <li>{item.name}</li>
+    {:then $list}
+      {#each $list as item}
+        <p>
+          {item}
           <button
             class="itemButton"
             on:click={() => {
-              removeItem(index)
+              removeItem(item)
             }}>🗑</button
           >
-        </p> -->
+        </p>
       {/each}
     {/await}
   </div>
