@@ -8,9 +8,8 @@
   import { maxNumber } from "$lib/stores"
   import { errorMessage } from "$lib/stores"
   import { getlistItems } from "$lib/db.js"
-  $list = getlistItems()
-  function removeItem(itemToRemove) {
-    $list = $list.filter((listItem) => listItem != itemToRemove)
+  function removeItem(index) {
+    $list = [...$list.slice(0, index), ...$list.slice(index + 1)]
   }
 </script>
 

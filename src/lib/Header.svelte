@@ -1,5 +1,9 @@
 <script>
   import Nav from "$lib/Nav.svelte"
+  import { isSignedIn } from "$lib/stores"
+  function SignIn() {
+    $isSignedIn = true
+  }
 </script>
 
 <header class="column is-one-third">

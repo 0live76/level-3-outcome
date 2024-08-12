@@ -2,6 +2,10 @@
   import Nav2 from "$lib/Nav2.svelte"
   import { user } from "$lib/stores"
   import { isSignedIn } from "$lib/stores"
+  function signOut() {
+    $user = "signedOut"
+    $isSignedIn = false
+  }
 </script>
 
 <header class="column is-one-third">
@@ -10,7 +14,7 @@
   <h2>Year 13 Grocery List</h2>
   <div>
     <img src="userIcon.png" alt="" />
-    <!-- <a on:click={signOut} href="/">Sign Out - {$user}</a> -->
+    <a on:click={signOut} href="/">Sign Out - {$user}</a>
   </div>
 </header>
 

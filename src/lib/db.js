@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite'
+import { initializeApp } from "firebase/app"
+import { getFirestore, collection, getDocs } from "firebase/firestore"
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -11,40 +11,24 @@ const firebaseConfig = {
   projectId: "outcome-2c848",
   storageBucket: "outcome-2c848.appspot.com",
   messagingSenderId: "714562778561",
-  appId: "1:714562778561:web:aa5b08b89a143b42996b40"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app)
-
-import { doc, getDoc } from "firebase/firestore";
-
-export async function getlistItems() {
-  let lists = []
-  
-  const listsDocs = await getDocs(collection(db, 'list'))
-  
-  listsDocs.forEach( (listDoc) => {
-    lists.push(listDoc.data())
-  })
-
-  console.dir(lists)
-
-  return lists[0].list
+  appId: "1:714562778561:web:aa5b08b89a143b42996b40",
 }
 
-// export async function getlistItems2() {
-//   console.debug('Starting the getList function...')
-//   let listItems = []
-  
-//   const listItemsDocs = await getDocs(collection(db, 'list'))
-  
-//   listItemsDocs.forEach( (listItemDoc) => {
-//     listItems.push(listItemDoc.data())
-//   })
-  
-  
-//   console.debug('Ending the getList function...')
-//     return listItems
-//   }
+// Initialize Firebase
+const app = initializeApp(firebaseConfig)
+const db = getFirestore(app)
+
+import { doc, getDoc } from "firebase/firestore"
+
+export async function getlistItems() {
+  const docRef = doc(db, "list", "24")
+  const docSnap = await getDoc(docRef)
+
+  if (docSnap.exists()) {
+    console.log("Document data:", docSnap.data())
+    return docSnap.data().list
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!")
+  }
+}
