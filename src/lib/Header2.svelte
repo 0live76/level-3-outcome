@@ -3,8 +3,8 @@
   import { user } from "$lib/stores"
   import { isSignedIn } from "$lib/stores"
   function signOut() {
-    $isSignedIn = false
     $user = "signedOut"
+    $isSignedIn = false
   }
 </script>
 
@@ -14,7 +14,7 @@
   <h2>Year 13 Grocery List</h2>
   <div>
     <img src="userIcon.png" alt="" />
-    <!-- <a on:click={signOut} href="/">Sign Out - {$user}</a> -->
+    <a on:click={signOut} href="/">Sign Out - {$user}</a>
   </div>
 </header>
 

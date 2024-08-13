@@ -1,5 +1,5 @@
 <script>
-  import { items } from "$lib/stores"
+  import { list } from "$lib/stores"
   import { user } from "$lib/stores"
   import { orderStatus } from "$lib/stores"
   import { tooMany as isError } from "$lib/stores"
@@ -8,19 +8,15 @@
   import { maxNumber } from "$lib/stores"
   import { errorMessage } from "$lib/stores"
   import { getlistItems } from "$lib/db.js"
-<<<<<<< Updated upstream
-
-  let list = getlistItems()
-
-  let addedItem = ""
-=======
-  function addItem() {}
-  function removeItem() {}
-  function cancelList() {}
-  function confirmList() {}
+  function removeItem(index) {
+    $list = [...$list.slice(0, index), ...$list.slice(index + 1)]
+  }
+  let newItem
   const d = new Date()
   document.getElementById("demo").innerHTML = d
->>>>>>> Stashed changes
+  function addItem() {
+    $list = [...$list, newItem]
+  }
 </script>
 
 <!-- <p class="status">Order Status: {$orderStatus}</p> -->
@@ -28,43 +24,30 @@
   <div class="listElement">
     <h4>Current List</h4>
     <h5>
-<<<<<<< Updated upstream
-      <!-- Date: {currentDate} -->
-    </h5>
-    {#await list}
-      <p>Loading...</p>
-    {:then list}
-      {list}
-      {#each list as item, index}
-        <p>{item}</p>
-=======
       Date: <p id="demo"></p>
     </h5>
-    <!-- {#await items}
+    {#await $list}
       <p>Loading...</p>
-    {:then items}
-      {#each items as item, index}
-        <p>{item.name}</p> -->
->>>>>>> Stashed changes
-
-    <!-- <p class="listItems">
-          <li>{item.name}</li>
+    {:then $list}
+      {#each $list as item, index}
+        <p class="listItems">
+          {item}
           <button
             class="itemButton"
             on:click={() => {
               removeItem(index)
             }}>🗑</button
           >
-        </p> -->
-    <!-- {/each}
-    {/await} -->
+        </p>
+      {/each}
+    {/await}
   </div>
-  <!-- <p class="addItemBox">
+  <p class="addItemBox">
     Add an Item:
-    <!-- <input bind:value={addedItem} /> -->
+    <input bind:value={newItem} />
     <button class="itemButton" on:click={addItem} disabled={$isError}>✅</button>
-  </p> -->
-  <!-- <p>{$errorMessage}</p> -->
+  </p>
+  <p>{$errorMessage}</p>
 </main>
 
 <!-- <div class="menu">
