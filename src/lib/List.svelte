@@ -11,10 +11,11 @@
   }
 </script>
 
-<!-- <p class="status">Order Status: {$orderStatus}</p> -->
+<p class="status">Order Status: {$orderStatus}</p>
 <main>
   <div class="listElement">
     <h4>Current List</h4>
+
     <h5>Date:</h5>
     {#await $list}
       <p>Loading...</p>
@@ -39,16 +40,14 @@
   </p>
   <p>{$errorMessage}</p>
 </main>
-
-<!-- <div class="menu">
+<div class="menu">
   {#if $user == "Student"}
     <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
   {/if}
-  {#if $user == "Matron"}
-    <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
-  {/if}
+  <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
+
   <button class="CCbutton confirm" on:click={confirmList}>Confirm Order</button>
-</div> -->
+</div>
 
 <style>
   main {
