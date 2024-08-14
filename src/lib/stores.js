@@ -1,6 +1,5 @@
-import { writable } from 'svelte/store'
+import { writable } from "svelte/store"
 import { getlistItems } from "$lib/db.js"
-
 
 export const user = writable("signedOut")
 export const isSignedIn = writable(false)
@@ -11,13 +10,6 @@ export const orderComplete = writable(false)
 export const maxNumber = writable(5)
 export const errorMessage = writable(" ")
 
+export const list = writable(getlistItems())
 
-
-export const items = writable([])
-
-
-export const statuses = writable([
-    "Ordering", "Moderating", "Catering", "Ready for Pick-Up"
-])
-
-
+export const statuses = writable(["Ordering", "Moderating", "Catering", "Ready for Pick-Up"])

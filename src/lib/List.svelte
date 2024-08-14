@@ -1,21 +1,13 @@
 <script>
   import { list } from "$lib/stores"
-  import { user } from "$lib/stores"
-  import { orderStatus } from "$lib/stores"
   import { tooMany as isError } from "$lib/stores"
-  import { quantity } from "$lib/stores"
-  import { orderComplete } from "$lib/stores"
-  import { maxNumber } from "$lib/stores"
   import { errorMessage } from "$lib/stores"
-  import { getlistItems } from "$lib/db.js"
-  function removeItem(index) {
-    $list = [...$list.slice(0, index), ...$list.slice(index + 1)]
-  }
   let newItem
-  const d = new Date()
-  document.getElementById("demo").innerHTML = d
   function addItem() {
     $list = [...$list, newItem]
+  }
+  function removeItem(index) {
+    $list = [...$list.slice(0, index), ...$list.slice(index + 1)]
   }
 </script>
 
@@ -23,9 +15,7 @@
 <main>
   <div class="listElement">
     <h4>Current List</h4>
-    <h5>
-      Date: <p id="demo"></p>
-    </h5>
+    <h5>Date:</h5>
     {#await $list}
       <p>Loading...</p>
     {:then $list}

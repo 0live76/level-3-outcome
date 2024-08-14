@@ -18,7 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 
-import { doc, getDoc, updateDoc } from "firebase/firestore"
+import { doc, getDoc } from "firebase/firestore"
 
 export async function getlistItems() {
   const docRef = doc(db, "list", "24")
