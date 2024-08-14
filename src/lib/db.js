@@ -18,7 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 
-import { doc, getDoc } from "firebase/firestore"
+import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore"
 
 export async function getlistItems() {
   const docRef = doc(db, "list", "24")
@@ -31,6 +31,17 @@ export async function getlistItems() {
     // docSnap.data() will be undefined in this case
     console.log("No such document!")
   }
+}
+
+export async function updateListItems(newItem, index) {
+  const docRef = doc(db, "list", "24")
+
+  await updateDoc(docRef, {
+    list: arrayUnion(newItem),
+  })
+  await updateDoc(docRef, {
+    list: arrayRemove(index),
+  })
 }
 
 // export async function getlistItems2() {

@@ -1,14 +1,19 @@
 <script>
   import { list } from "$lib/stores"
   import { errorMessage } from "$lib/stores"
+  import { updateListItems } from "$lib/db.js"
+  import { removeListItems } from "$lib/db.js"
+
   let newItem
   function addItem() {
     console.dir($list)
     $list = [...$list, newItem]
+    updateListItems(newItem)
   }
   function removeItem(index) {
     console.dir($list)
     $list = [...$list.slice(0, index), ...$list.slice(index + 1)]
+    removeListItems()
   }
 </script>
 
@@ -40,6 +45,8 @@
     <button class="itemButton" on:click={addItem}>✅</button>
   </p>
   <p>{$errorMessage}</p>
+
+  <button on:click={updateListItems}>Add milk!</button>
 </main>
 
 <!-- <div class="menu">
