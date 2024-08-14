@@ -26,6 +26,7 @@ export async function getlistItems() {
 
   if (docSnap.exists()) {
     console.log("Document data:", docSnap.data())
+    console.log("List is a:", typeof docSnap.data().list)
     return docSnap.data().list
   } else {
     // docSnap.data() will be undefined in this case

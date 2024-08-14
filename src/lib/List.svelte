@@ -1,17 +1,17 @@
 <script>
   import { list } from "$lib/stores"
-  import { tooMany as isError } from "$lib/stores"
   import { errorMessage } from "$lib/stores"
   let newItem
   function addItem() {
     $list = [...$list, newItem]
   }
   function removeItem(index) {
+    console.dir(typeof $list)
     $list = [...$list.slice(0, index), ...$list.slice(index + 1)]
   }
 </script>
 
-<p class="status">Order Status: {$orderStatus}</p>
+<!-- <p class="status">Order Status: {$orderStatus}</p> -->
 <main>
   <div class="listElement">
     <h4>Current List</h4>
@@ -36,18 +36,19 @@
   <p class="addItemBox">
     Add an Item:
     <input bind:value={newItem} />
-    <button class="itemButton" on:click={addItem} disabled={$isError}>✅</button>
+    <button class="itemButton" on:click={addItem}>✅</button>
   </p>
   <p>{$errorMessage}</p>
 </main>
-<div class="menu">
+
+<!-- <div class="menu">
   {#if $user == "Student"}
     <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
   {/if}
   <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
 
   <button class="CCbutton confirm" on:click={confirmList}>Confirm Order</button>
-</div>
+</div> -->
 
 <style>
   main {
@@ -63,13 +64,13 @@
     font-style: italic;
     font-size: 110%;
   }
-  .status {
+  /* .status {
     font-weight: bold;
     font-size: 170%;
     color: #000;
     margin-top: 2%;
     text-align: center;
-  }
+  } */
   .listElement {
     width: 60%;
     padding: 3%;
@@ -101,7 +102,7 @@
     font-size: 120%;
     background-color: white;
   }
-  .menu {
+  /* .menu {
     display: flex;
     align-content: center;
     justify-content: space-evenly;
@@ -119,5 +120,5 @@
   }
   .confirm {
     background-color: #003f2c;
-  }
+  } */
 </style>
