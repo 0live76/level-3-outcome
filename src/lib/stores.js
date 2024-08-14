@@ -10,6 +10,6 @@ export const orderComplete = writable(false)
 export const maxNumber = writable(5)
 export const errorMessage = writable(" ")
 
-export const list = writable(getlistItems())
+export const list = writable(await getlistItems())
 
 export const statuses = writable(["Ordering", "Moderating", "Catering", "Ready for Pick-Up"])

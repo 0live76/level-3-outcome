@@ -3,10 +3,11 @@
   import { errorMessage } from "$lib/stores"
   let newItem
   function addItem() {
+    console.dir($list)
     $list = [...$list, newItem]
   }
   function removeItem(index) {
-    console.dir(typeof $list)
+    console.dir($list)
     $list = [...$list.slice(0, index), ...$list.slice(index + 1)]
   }
 </script>
@@ -16,7 +17,7 @@
   <div class="listElement">
     <h4>Current List</h4>
 
-    <h5>Date:</h5>
+    <h5>Date: {new Date().toDateString()}</h5>
     {#await $list}
       <p>Loading...</p>
     {:then $list}
