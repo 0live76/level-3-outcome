@@ -18,7 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 
-import { doc, getDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore"
+import { doc, getDoc, updateDoc, setDoc, arrayUnion, arrayRemove } from "firebase/firestore"
 
 export async function getlistItems() {
   const docRef = doc(db, "list", "24")
@@ -44,6 +44,11 @@ export async function removeListItems(itemToRemove) {
   const docRef = doc(db, "list", "24")
   await updateDoc(docRef, {
     list: arrayRemove(itemToRemove),
+  })
+}
+export async function clearList() {
+  await setDoc(doc(db, "list", "24"), {
+    list: [],
   })
 }
 

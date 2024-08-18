@@ -4,6 +4,7 @@
   import { errorMessage } from "$lib/stores"
   import { updateListItems } from "$lib/db.js"
   import { removeListItems } from "$lib/db.js"
+  import { clearList } from "$lib/db.js"
 
   let newItem
   function addItem() {
@@ -16,7 +17,10 @@
     $list = [...$list.slice(0, index), ...$list.slice(index + 1)]
     removeListItems(item)
   }
-  function cancelList() {}
+  function cancelList() {
+    $list = []
+    clearList()
+  }
 </script>
 
 <!-- <p class="status">Order Status: {$orderStatus}</p> -->
@@ -53,7 +57,6 @@
   {#if $user == "Student"}
     <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
   {/if}
-  <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
 
   <button class="CCbutton confirm" on:click={confirmList}>Confirm Order</button>
 </div>
