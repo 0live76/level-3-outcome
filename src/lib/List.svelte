@@ -1,5 +1,6 @@
 <script>
   import { list } from "$lib/stores"
+  import { user } from "$lib/stores"
   import { errorMessage } from "$lib/stores"
   import { updateListItems } from "$lib/db.js"
   import { removeListItems } from "$lib/db.js"
@@ -10,11 +11,12 @@
     $list = [...$list, newItem]
     updateListItems(newItem)
   }
-  function removeItem(index) {
+  function removeItem(item, index) {
     console.dir($list)
     $list = [...$list.slice(0, index), ...$list.slice(index + 1)]
-    removeListItems()
+    removeListItems(item)
   }
+  function cancelList() {}
 </script>
 
 <!-- <p class="status">Order Status: {$orderStatus}</p> -->
@@ -32,7 +34,7 @@
           <button
             class="itemButton"
             on:click={() => {
-              removeItem(index)
+              removeItem(item, index)
             }}>🗑</button
           >
         </p>
@@ -45,18 +47,16 @@
     <button class="itemButton" on:click={addItem}>✅</button>
   </p>
   <p>{$errorMessage}</p>
-
-  <button on:click={updateListItems}>Add milk!</button>
 </main>
 
-<!-- <div class="menu">
+<div class="menu">
   {#if $user == "Student"}
     <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
   {/if}
   <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
 
   <button class="CCbutton confirm" on:click={confirmList}>Confirm Order</button>
-</div> -->
+</div>
 
 <style>
   main {
@@ -110,7 +110,7 @@
     font-size: 120%;
     background-color: white;
   }
-  /* .menu {
+  .menu {
     display: flex;
     align-content: center;
     justify-content: space-evenly;
@@ -128,5 +128,5 @@
   }
   .confirm {
     background-color: #003f2c;
-  } */
+  }
 </style>
