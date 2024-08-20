@@ -21,14 +21,18 @@
 <style>
   header {
     background-color: #f2a633;
-    padding: 2%;
+
     height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
   h1 {
     font-family: "DM Sans", sans-serif;
     font-size: 450%;
     margin-top: 25%;
     margin-left: 5%;
+    margin-right: 5%;
+
     color: white;
     text-transform: uppercase;
     font-weight: bold;
@@ -51,5 +55,39 @@
     padding: 3%;
     font-family: "DM Sans", sans-serif;
     background-color: white;
+  }
+
+  @media only screen and (max-width: 600px) {
+    header {
+      /* background-color: #f2a633; */
+      background-color: blue;
+      padding: 2%;
+      margin: 5%;
+      border-radius: 10px;
+      height: 90vh;
+      margin-bottom: -6%;
+      flex-direction: column-reverse;
+    }
+    h1 {
+      font-family: "DM Sans", sans-serif;
+      font-size: 300%;
+      margin-top: 50%;
+      text-align: center;
+      margin-left: 0;
+    }
+
+    h2 {
+      font-family: "DM Sans", sans-serif;
+      padding-bottom: 5%;
+      font-style: italic;
+      font-size: 180%;
+      padding-top: 3%;
+      color: black;
+      text-align: center;
+      margin-left: 0;
+    }
+    div {
+      display: flex;
+    }
   }
 </style>

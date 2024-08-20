@@ -33,4 +33,10 @@
     padding-left: 6%;
     padding-top: 4%;
   }
+
+  @media only screen and (max-width: 600px) {
+    footer {
+      visibility: collapse;
+    }
+  }
 </style>
