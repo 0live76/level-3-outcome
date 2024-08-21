@@ -32,6 +32,18 @@ export async function getlistItems() {
     console.log("No such document!")
   }
 }
+export async function getStatus() {
+  const docRef = doc(db, "list", "24")
+  const docSnap = await getDoc(docRef)
+
+  if (docSnap.exists()) {
+    const theWholeList = docSnap.data()
+    return theWholeList.isReady
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!")
+  }
+}
 
 export async function updateListItems(newItem) {
   const docRef = doc(db, "list", "24")
@@ -49,6 +61,11 @@ export async function removeListItems(itemToRemove) {
 export async function clearList() {
   await setDoc(doc(db, "list", "24"), {
     list: [],
+  })
+}
+export async function updateStatus(status) {
+  await setDoc(doc(db, "list", "24"), {
+    isReady: status,
   })
 }
 

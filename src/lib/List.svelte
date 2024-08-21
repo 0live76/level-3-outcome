@@ -1,12 +1,15 @@
 <script>
   import { list } from "$lib/stores"
   import { user } from "$lib/stores"
-  import { errorMessage } from "$lib/stores"
+  import { isReady } from "$lib/stores"
   import { updateListItems } from "$lib/db.js"
   import { removeListItems } from "$lib/db.js"
   import { clearList } from "$lib/db.js"
+  import { updateStatus } from "$lib/db.js"
+  import { errorMessage } from "$lib/stores"
 
   let newItem
+
   function addItem() {
     console.dir($list)
     $list = [...$list, newItem]
@@ -20,6 +23,14 @@
   function cancelList() {
     $list = []
     clearList()
+    $isReady = false
+    $errorMessage = " "
+  }
+  function confirmList(status) {
+    $isReady = true
+    status = true
+    $errorMessage = "Food is ready for pickup."
+    updateStatus(status)
   }
 </script>
 
@@ -54,11 +65,12 @@
 </main>
 
 <div class="menu">
-  {#if $user == "Student"}
-    <button class="CCbutton" on:click={cancelList}>Cancel Order</button>
+  {#if $user == "Student" || "Matron"}
+    <button class="CCbutton" on:click={cancelList}>Clear Order</button>
   {/if}
-
-  <button class="CCbutton confirm" on:click={confirmList}>Confirm Order</button>
+  {#if $user == "Caterer"}
+    <button class="CCbutton confirm" on:click={confirmList}>Confirm Order</button>
+  {/if}
 </div>
 
 <style>
