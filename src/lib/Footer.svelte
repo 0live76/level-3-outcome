@@ -20,12 +20,15 @@
     font-family: "DM Sans", sans-serif;
     font-style: italic;
     box-shadow: -1px -1px 3px grey;
+    width: 100%;
+    padding-top: 2%;
+    padding-bottom: 2%;
   }
   p {
     color: rgba(0, 0, 0, 0.25);
     text-decoration: underline;
-    padding-bottom: 2%;
-    padding-top: 2%;
+    padding-bottom: 3%;
+    padding-top: 3%;
   }
   .bold {
     font-weight: bold;
@@ -37,6 +40,7 @@
   @media only screen and (max-width: 600px) {
     footer {
       visibility: collapse;
+      display: none;
     }
   }
 </style>
