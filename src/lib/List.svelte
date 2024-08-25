@@ -32,7 +32,6 @@
     $errorMessage = "Food is ready for pickup."
     updateStatus(status)
   }
-  function confirmList() {}
 </script>
 
 <!-- <p class="status">Order Status: {$orderStatus}</p> -->
