@@ -33,6 +33,10 @@
       </CollapsibleSection>
     </section>
   </div>
+  <div class="mobileSignOut">
+    <img src="userIcon.png" alt="" />
+    <a on:click={signOut} href="/">Sign Out - {$user}</a>
+  </div>
 </div>
 
 <Footer />
