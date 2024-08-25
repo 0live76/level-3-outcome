@@ -36,7 +36,6 @@
     margin-top: 25%;
     margin-left: 5%;
     margin-right: 5%;
-
     color: white;
     text-transform: uppercase;
     font-weight: bold;
@@ -71,7 +70,6 @@
       margin-left: 4%;
       margin-right: 4%;
       margin-top: 4%;
-
       border-radius: 10px;
     }
     h1 {
@@ -84,9 +82,7 @@
 
     h2 {
       font-family: "DM Sans", sans-serif;
-
       font-size: 180%;
-
       text-align: center;
       margin-left: 0;
     }

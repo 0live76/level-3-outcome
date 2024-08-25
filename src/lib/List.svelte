@@ -20,16 +20,23 @@
     $list = [...$list.slice(0, index), ...$list.slice(index + 1)]
     removeListItems(item)
   }
-  function cancelList() {
+  function cancelList(status) {
     $list = []
     clearList()
     $isReady = false
     $errorMessage = " "
+    status = false
+    updateStatus(status)
   }
   function confirmList(status) {
     $isReady = true
     status = true
-    $errorMessage = "Food is ready for pickup."
+    $errorMessage = "Order has been placed."
+    updateStatus(status)
+  }
+  function approveOrder(status) {
+    status = true
+    $errorMessage = "List has been approved by moderators."
     updateStatus(status)
   }
 </script>
@@ -67,6 +74,9 @@
 <div class="menu">
   {#if $user == "Student" || "Matron"}
     <button class="CCbutton" on:click={cancelList}>Clear Order</button>
+  {/if}
+  {#if $user == "Matron"}
+    <button class="CCbutton confirm" on:click={approveOrder}>Approve Order</button>
   {/if}
   {#if $user == "Caterer"}
     <button class="CCbutton confirm" on:click={confirmList}>Confirm Order</button>
@@ -145,5 +155,8 @@
     background-color: #003f2c;
   }
   @media only screen and (max-width: 600px) {
+    .listElement {
+      width: 90%;
+    }
   }
 </style>

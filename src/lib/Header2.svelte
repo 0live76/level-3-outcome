@@ -10,9 +10,11 @@
 
 <header class="column is-one-third">
   <Nav2 />
-  <h1>Craighead Diocesan School</h1>
-  <h2>Year 13 Grocery List</h2>
-  <div>
+  <div class="mainSection">
+    <h1>Craighead Diocesan School</h1>
+    <h2>Year 13 Grocery List</h2>
+  </div>
+  <div class="signOutDesktop">
     <img src="userIcon.png" alt="" />
     <a on:click={signOut} href="/">Sign Out - {$user}</a>
   </div>
@@ -21,8 +23,12 @@
 <style>
   header {
     background-color: #003f2c;
-    padding: 2%;
+    display: flex;
+    flex-direction: column;
     height: 100vh;
+  }
+  .mainSection {
+    flex-direction: column;
   }
   h1 {
     font-family: "DM Sans", sans-serif;
@@ -53,11 +59,40 @@
   a:hover {
     font-style: italic;
   }
-  div {
+  .signOutDesktop {
     display: flex;
-    margin-top: 25%;
   }
   img {
     width: 15%;
+  }
+  @media only screen and (max-width: 600px) {
+    .signOutDesktop {
+      visibility: collapse;
+      display: none;
+    }
+    .mainSection {
+      flex-direction: column;
+    }
+    header {
+      flex-direction: column-reverse;
+      justify-content: center;
+      margin-left: 4%;
+      margin-right: 4%;
+      margin-top: 4%;
+      height: 10vh;
+      border-radius: 10px;
+    }
+    h1 {
+      font-family: "DM Sans", sans-serif;
+      font-size: 130%;
+      text-align: center;
+      margin-left: 0;
+      margin-top: 2%;
+    }
+
+    h2 {
+      visibility: collapse;
+      display: none;
+    }
   }
 </style>
