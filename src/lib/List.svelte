@@ -32,6 +32,7 @@
     $errorMessage = "Food is ready for pickup."
     updateStatus(status)
   }
+  function confirmList() {}
 </script>
 
 <!-- <p class="status">Order Status: {$orderStatus}</p> -->
@@ -143,5 +144,7 @@
   }
   .confirm {
     background-color: #003f2c;
+  }
+  @media only screen and (max-width: 600px) {
   }
 </style>

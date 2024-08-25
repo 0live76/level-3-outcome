@@ -13,6 +13,7 @@
     display: flex;
     align-content: center;
     justify-content: space-around;
+    padding-top: 3%;
   }
   a {
     color: black;
@@ -27,5 +28,16 @@
   .current-page {
     text-decoration: underline;
     font-weight: bolder;
+  }
+  @media only screen and (max-width: 600px) {
+    nav {
+      background-color: white;
+      padding: 3%;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      right: 0s;
+      width: 100%;
+    }
   }
 </style>

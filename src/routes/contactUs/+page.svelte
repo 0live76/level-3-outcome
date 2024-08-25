@@ -57,4 +57,12 @@
   img {
     width: 4.2em;
   }
+  .columns:not(:last-child) {
+    margin-bottom: 0;
+  }
+  @media only screen and (max-width: 600px) {
+    .column {
+      margin-bottom: 30%;
+    }
+  }
 </style>

@@ -48,9 +48,16 @@
     width: 80%;
     margin-left: 3%;
   }
-
+  .columns:not(:last-child) {
+    margin-bottom: 0;
+  }
   .content {
     background-color: #f4f4f4;
     padding: 0.5em;
+  }
+  @media only screen and (max-width: 600px) {
+    .column {
+      margin-bottom: 40%;
+    }
   }
 </style>
