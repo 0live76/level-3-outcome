@@ -61,6 +61,7 @@
   }
   .signOutDesktop {
     display: flex;
+    padding-top: 10%;
   }
   img {
     width: 15%;

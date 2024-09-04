@@ -1,4 +1,5 @@
 <script>
+  //imports local stores variable and firebase functions
   import { list } from "$lib/stores"
   import { user } from "$lib/stores"
   import { isReady } from "$lib/stores"
@@ -9,17 +10,19 @@
   import { errorMessage } from "$lib/stores"
 
   let newItem
-
+  //Adds item to list array and then updates to firebase
   function addItem() {
     console.dir($list)
     $list = [...$list, newItem]
     updateListItems(newItem)
   }
+  //Removes specified item from array, updates firebase
   function removeItem(item, index) {
     console.dir($list)
     $list = [...$list.slice(0, index), ...$list.slice(index + 1)]
     removeListItems(item)
   }
+  //Clears list array, updates to firebase(currently deletes field which breaks page)
   function cancelList(status) {
     $list = []
     clearList()
@@ -28,6 +31,7 @@
     status = false
     updateStatus(status)
   }
+  //Confirms for user by displaying string that updates to firebase, message depends on user type.
   function confirmList(status) {
     $isReady = true
     status = true

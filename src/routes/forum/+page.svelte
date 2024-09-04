@@ -7,5 +7,16 @@
   $isSignedIn = true
 </script>
 
-<Header />
+<div class="columns">
+  <Header />
+  <div class="column">
+    <h2>Coming Soon</h2>
+  </div>
+</div>
 <Footer />
+
+<style>
+  .columns:not(:last-child) {
+    margin-bottom: 0;
+  }
+</style>

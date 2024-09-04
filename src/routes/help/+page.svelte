@@ -4,7 +4,6 @@
   import Footer from "$lib/Footer.svelte"
   import { isSignedIn } from "$lib/stores"
   import { user } from "$lib/stores"
-
   import CollapsibleSection from "$lib/Collapsible.svelte"
   function signOut() {
     $user = "signedOut"
@@ -50,6 +49,10 @@
 <Footer />
 
 <style>
+  .mobileSignOut {
+    visibility: collapse;
+    display: none;
+  }
   h3 {
     font-weight: bold;
     font-size: 170%;
