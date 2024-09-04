@@ -3,7 +3,13 @@
   import Header2 from "$lib/Header2.svelte"
   import Footer from "$lib/Footer.svelte"
   import { isSignedIn } from "$lib/stores"
+  import { user } from "$lib/stores"
+
   import CollapsibleSection from "$lib/Collapsible.svelte"
+  function signOut() {
+    $user = "signedOut"
+    $isSignedIn = false
+  }
 </script>
 
 <div class="columns">
@@ -33,10 +39,12 @@
       </CollapsibleSection>
     </section>
   </div>
-  <div class="mobileSignOut">
-    <img src="userIcon.png" alt="" />
-    <a on:click={signOut} href="/">Sign Out - {$user}</a>
-  </div>
+  {#if $isSignedIn}
+    <div class="mobileSignOut">
+      <img src="userIcon2.png" alt="" />
+      <a on:click={signOut} href="/">Sign Out - {$user}</a>
+    </div>
+  {/if}
 </div>
 
 <Footer />
@@ -59,9 +67,33 @@
     background-color: #f4f4f4;
     padding: 0.5em;
   }
+  .mobileSignOut {
+    visibility: collapse;
+    display: none;
+  }
+
   @media only screen and (max-width: 600px) {
-    .column {
-      margin-bottom: 40%;
+    a {
+      color: black;
+      font-family: "DM Sans", sans-serif;
+      font-size: 150%;
+      padding-top: 2%;
+      padding-left: 3%;
+    }
+    a:hover {
+      font-style: italic;
+    }
+    .mobileSignOut {
+      display: flex;
+      visibility: visible;
+      margin-left: 5%;
+      padding-top: 10%;
+    }
+    img {
+      width: 15%;
+    }
+    .columns:not(:last-child) {
+      margin-bottom: 10%;
     }
   }
 </style>

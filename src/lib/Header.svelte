@@ -77,7 +77,6 @@
       font-size: 300%;
       text-align: center;
       margin-left: 0;
-      /* margin-top: -160%; */
     }
 
     h2 {
