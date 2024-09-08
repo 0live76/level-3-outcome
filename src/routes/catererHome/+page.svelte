@@ -16,4 +16,7 @@
 <Footer />
 
 <style>
+  .columns:not(:last-child) {
+    margin-bottom: 0;
+  }
 </style>

@@ -54,17 +54,21 @@
     {#await $list}
       <p>Loading...</p>
     {:then $list}
-      {#each $list as item, index}
-        <p class="listItems">
-          {item}
-          <button
-            class="itemButton"
-            on:click={() => {
-              removeItem(item, index)
-            }}>🗑</button
-          >
-        </p>
-      {/each}
+      {#if typeof $list != "undefined"}
+        {#each $list as item, index}
+          <p class="listItems">
+            {item}
+            <button
+              class="itemButton"
+              on:click={() => {
+                removeItem(item, index)
+              }}>🗑</button
+            >
+          </p>
+        {/each}
+      {:else}
+        <p>Order Cleared</p>
+      {/if}
     {/await}
   </div>
   <p class="addItemBox">
