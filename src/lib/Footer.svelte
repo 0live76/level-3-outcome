@@ -4,13 +4,13 @@
       <p class="bold">&copy; Olive Roxburgh 2024</p>
     </div>
     <div class="column is-one-quarter">
-      <p>Help using the Website</p>
-      <p>Contact Us</p>
+      <a href="help">Help using the Website</a>
+      <a href="contactUs">Contact Us</a>
     </div>
-    <div class="column is-one-quarter">
+    <!-- <div class="column is-one-quarter">
       <p>About Us</p>
       <p>Get ListPlus for your School</p>
-    </div>
+    </div> -->
   </div>
 </footer>
 
@@ -24,7 +24,7 @@
     padding-top: 2%;
     padding-bottom: 2%;
   }
-  p {
+  a {
     color: rgba(0, 0, 0, 0.25);
     text-decoration: underline;
     padding-bottom: 3%;
@@ -36,7 +36,9 @@
     padding-left: 6%;
     padding-top: 4%;
   }
-
+  div {
+    display: column;
+  }
   @media only screen and (max-width: 600px) {
     footer {
       visibility: collapse;

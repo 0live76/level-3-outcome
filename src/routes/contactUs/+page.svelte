@@ -18,15 +18,15 @@
 
     <div class="section">
       <img src="facebookIcon.png" alt="" />
-      <p>Facebook</p>
+      <a href="https://www.facebook.com/timarucraigheaddiocesan">Facebook</a>
     </div>
     <div class="section">
-      <img src="instagramIcon.png" alt="" />
-      <p>Instagram</p>
+      <img src="websiteIcon.png" alt="" />
+      <a href="https://www.craighead.school.nz/">Our Website</a>
     </div>
     <div class="section">
       <img src="emailIcon.png" alt="" />
-      <p>Email</p>
+      <a href="mailto:hostel@craighead.school.nz">Email</a>
     </div>
   </div>
 </div>
@@ -41,6 +41,14 @@
     color: #000;
   }
 
+  a {
+    font-family: "DM Sans", sans-serif;
+    margin-left: 3%;
+    color: black;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 130%;
+  }
   p {
     font-family: "DM Sans", sans-serif;
     margin-left: 3%;
