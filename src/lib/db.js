@@ -62,7 +62,7 @@ export async function removeListItems(itemToRemove) {
 export async function clearList() {
   const docRef = doc(db, "list", "24")
   await updateDoc(docRef, {
-    list: deleteField(),
+    list: deleteField(StringFormat),
   })
   await setDoc(docRef, {
     list: ["gone"],

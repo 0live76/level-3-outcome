@@ -12,6 +12,9 @@
   let newItem
   //Adds item to list array and then updates to firebase
   function addItem() {
+    if ($list == undefined) {
+      $list = []
+    }
     console.dir($list)
     $list = [...$list, newItem]
     updateListItems(newItem)
@@ -24,7 +27,7 @@
   }
   //Clears list array, updates to firebase(currently deletes field which breaks page)
   function cancelList(status) {
-    $list = []
+    $list = undefined
     clearList()
     $isReady = false
     $errorMessage = " "
