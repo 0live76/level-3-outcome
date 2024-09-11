@@ -38,12 +38,17 @@
   function confirmList(status) {
     $isReady = true
     status = true
-    $errorMessage = "Order has been placed."
+    $errorMessage = "Order has been placed by caterers."
     updateStatus(status)
   }
   function approveOrder(status) {
     status = true
-    $errorMessage = "List has been approved by moderators."
+    $errorMessage = "Order has been approved by moderators."
+    updateStatus(status)
+  }
+  function requestOrder(status) {
+    status = true
+    $errorMessage = "Order has been requested by students."
     updateStatus(status)
   }
 </script>
@@ -85,6 +90,9 @@
 <div class="menu">
   {#if $user == "Student" || "Matron"}
     <button class="CCbutton" on:click={cancelList}>Clear Order</button>
+  {/if}
+  {#if $user == "Student"}
+    <button class="CCbutton confirm" on:click={requestOrder}>Request Order</button>
   {/if}
   {#if $user == "Matron"}
     <button class="CCbutton confirm" on:click={approveOrder}>Approve Order</button>

@@ -8,7 +8,8 @@
   <Header />
   <div class="column">
     <h3>Order History</h3>
-    <section>
+    <p>Coming Soon</p>
+    <!-- <section>
       <CollapsibleSection headerText={"7/10/24"}>
         <div class="content">Look at all this fun content</div>
       </CollapsibleSection>
@@ -25,7 +26,7 @@
         <div class="content">Look at all this fun content</div>
       </CollapsibleSection>
     </section>
-    <p>Load More</p>
+    <p>Load More</p> -->
   </div>
 </main>
 <Footer />
@@ -37,7 +38,7 @@
     color: #000;
     margin: 3%;
   }
-  section {
+  /* section {
     width: 80%;
     margin-left: 3%;
   }
@@ -45,9 +46,8 @@
   .content {
     background-color: #f4f4f4;
     padding: 0.5em;
-  }
+  } */
   p {
-    text-decoration: underline;
     font-family: "DM Sans" sans-serif;
     margin-left: 3%;
   }

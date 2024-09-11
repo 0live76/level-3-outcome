@@ -9,6 +9,10 @@
     $user = "signedOut"
     $isSignedIn = false
   }
+
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({ pageLanguage: "en", layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL }, "google_translate_element")
+  }
 </script>
 
 <div class="columns">
@@ -22,25 +26,66 @@
     <h3>Help</h3>
     <section>
       <CollapsibleSection headerText={"Our System"}>
-        <div class="content">Look at all this fun content</div>
+        <div class="content">1. Students put the items they would like to order on the list.<br /> 2. When the list is complete, they request the order. <br /> 3. The moderators then approve/edit the order.<br /> 4. Once approved by the moderators, the caterers can then confirm they have placed the order with their supplier.<br /> 5. The list can then be cleared, ready for the next order!</div>
       </CollapsibleSection>
       <CollapsibleSection headerText={"How to Use the Website"}>
-        <div class="content">Look at all this fun content</div>
+        <div class="content">
+          Navigate the website using the menu in the top left. For additional help or information, check the footer at the bottom of every page, or the help page.
+          <img src="navigateHelp.png" alt="" />
+          <div class="columns">
+            <p class="column">1. Log in with the correct ID. Are you a Student, Matron/Moderator, or Caterer?</p>
+            <img class="column" src="loginHelp.png" alt="" />
+          </div>
+          <div class="columns">
+            <p>2. Add an item using the text box input field, then pressing the “ ✅” button.</p>
+            <img src="addItemHelp.png" alt="" />
+          </div>
+          <div class="columns">
+            <p>3. To remove an item, press the “🗑” button next to the item you want to remove.</p>
+            <img src="removeItemHelp.png" alt="" />
+          </div>
+          <div class="columns">
+            <p>4. To confirm your order, press the green button. To remove all items on the list, press the red “Clear Order” button.</p>
+            <img src="buttonHelp.png" alt="" />
+          </div>
+          <div class="columns">
+            <p>5. On mobile, the log out option is located on the help page.</p>
+            <img class="usericon" src="mobileHelp.png" alt="" />
+          </div>
+        </div>
       </CollapsibleSection>
       <CollapsibleSection headerText={"FAQs"}>
-        <div class="content">Look at all this fun content</div>
+        <div class="content">
+          <p class="question">Do I need to make an account?</p>
+          You don’t need to create a new account to use the app. Currently, all you have to do is select the type of user you are, and you will be directed to the correct page.
+          <p class="question">How do I add stuff?</p>
+          To add an item, click inside the empty box at the bottom of the list. Then, type in the food item you want to add. Then, press the “ ✅” button. 
+          <p class="question">How do I remove stuff?</p>
+          To remove an item, press the “🗑” button next to the item you want to remove.
+          <p class="question">How do I know if the list has been sent through?</p>
+         If the list has been sent through, it will display the corresponding message for the user: Student: "Order has been requested by students." Matron: “Order has been approved by moderators.” Caterer: “Order has been placed by caterers.”</div>
       </CollapsibleSection>
       <CollapsibleSection headerText={"Get GroceryApp for Your School"}>
         <div class="content">Look at all this fun content</div>
       </CollapsibleSection>
       <CollapsibleSection headerText={"Language"}>
-        <div class="content">Look at all this fun content</div>
+        <div class="content">
+          <p>You can translate the content of this page by selecting a language in the select box.</p>
+          <div id="google_translate_element"></div>
+          <script type="text/javascript">
+            function googleTranslateElementInit() {
+              new google.translate.TranslateElement({ pageLanguage: "en" }, "google_translate_element")
+            }
+          </script>
+
+          <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        </div>
       </CollapsibleSection>
     </section>
   </div>
   {#if $isSignedIn}
     <div class="mobileSignOut">
-      <img src="userIcon2.png" alt="" />
+      <img class="usericon" src="userIcon2.png" alt="" />
       <a on:click={signOut} href="/">Sign Out - {$user}</a>
     </div>
   {/if}
@@ -66,13 +111,25 @@
   .columns:not(:last-child) {
     margin-bottom: 0;
   }
+  img {
+    width: 50%;
+    padding: 3%;
+  }
+  p {
+    padding-top: 5%;
+  }
   .content {
-    background-color: #f4f4f4;
     padding: 0.5em;
+    font-family: "DM Sans", sans-serif;
+    color: #000;
+    margin-bottom: 3%;
   }
   .mobileSignOut {
     visibility: collapse;
     display: none;
+  }
+  .usericon {
+    width: 25%;
   }
 
   @media only screen and (max-width: 600px) {
@@ -92,7 +149,7 @@
       margin-left: 5%;
       padding-top: 10%;
     }
-    img {
+    .usericon {
       width: 15%;
     }
     .columns:not(:last-child) {
