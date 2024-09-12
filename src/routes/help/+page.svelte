@@ -7,12 +7,13 @@
   import { guidelines } from "$lib/stores"
   import { updateGuidelines } from "$lib/db.js"
   import { removeGuideline } from "$lib/db.js"
-
   import CollapsibleSection from "$lib/Collapsible.svelte"
+  //Signs out user.
   function signOut() {
     $user = "signedOut"
     $isSignedIn = false
   }
+  //Adds new moderator guidelines.
   let newGuideline
   function addGuideline() {
     if ($guidelines == undefined) {
@@ -96,37 +97,39 @@
           <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         </div>
       </CollapsibleSection>
-      <CollapsibleSection headerText={"List Guidelines from Moderators"}>
-        <div class="content">
-          {#await $guidelines}
-            <p>Loading...</p>
-          {:then $guidelines}
-            {#if typeof $guidelines != "undefined"}
-              {#each $guidelines as item, index}
-                <p>
-                  <li>
-                    {item}
-                    {#if $user == "Matron"}
-                      <button
-                        on:click={() => {
-                          deleteGuideline(item, index)
-                        }}>🗑</button
-                      >
-                    {/if}
-                  </li>
-                </p>
-              {/each}
-            {:else}
-              <p>No Guidelines Added</p>
-            {/if}
-          {/await}
-        </div>
-        {#if $user == "Matron"}
-          <p>Edit List Guidelines</p>
-          <input bind:value={newGuideline} />
-          <button class="itemButton" on:click={addGuideline}>✅</button>
-        {/if}
-      </CollapsibleSection>
+      {#if $isSignedIn == true}
+        <CollapsibleSection headerText={"List Guidelines from Moderators"}>
+          <div class="content">
+            {#await $guidelines}
+              <p>Loading...</p>
+            {:then $guidelines}
+              {#if typeof $guidelines == "undefined"}
+                <p>No Guidelines Added</p>
+              {:else}
+                {#each $guidelines as item, index}
+                  <p>
+                    <li>
+                      {item}
+                      {#if $user == "Matron"}
+                        <button
+                          on:click={() => {
+                            deleteGuideline(item, index)
+                          }}>🗑</button
+                        >
+                      {/if}
+                    </li>
+                  </p>
+                {/each}
+              {/if}
+            {/await}
+          </div>
+          {#if $user == "Matron"}
+            <p>Edit List Guidelines</p>
+            <input bind:value={newGuideline} />
+            <button class="itemButton" on:click={addGuideline}>✅</button>
+          {/if}
+        </CollapsibleSection>
+      {/if}
     </section>
   </div>
   {#if $isSignedIn}
