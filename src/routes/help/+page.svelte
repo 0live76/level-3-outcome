@@ -4,14 +4,28 @@
   import Footer from "$lib/Footer.svelte"
   import { isSignedIn } from "$lib/stores"
   import { user } from "$lib/stores"
+  import { guidelines } from "$lib/stores"
+  import { updateGuidelines } from "$lib/db.js"
+  import { removeGuideline } from "$lib/db.js"
+
   import CollapsibleSection from "$lib/Collapsible.svelte"
   function signOut() {
     $user = "signedOut"
     $isSignedIn = false
   }
-
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({ pageLanguage: "en", layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL }, "google_translate_element")
+  let newGuideline
+  function addGuideline() {
+    if ($guidelines == undefined) {
+      $guidelines = []
+    }
+    console.dir($guidelines)
+    $guidelines = [...$guidelines, newGuideline]
+    updateGuidelines(newGuideline)
+  }
+  function deleteGuideline(item, index) {
+    console.dir($guidelines)
+    $guidelines = [...$guidelines.slice(0, index), ...$guidelines.slice(index + 1)]
+    removeGuideline(item)
   }
 </script>
 
@@ -59,14 +73,15 @@
           <p class="question">Do I need to make an account?</p>
           You don’t need to create a new account to use the app. Currently, all you have to do is select the type of user you are, and you will be directed to the correct page.
           <p class="question">How do I add stuff?</p>
-          To add an item, click inside the empty box at the bottom of the list. Then, type in the food item you want to add. Then, press the “ ✅” button. 
+          To add an item, click inside the empty box at the bottom of the list. Then, type in the food item you want to add. Then, press the “ ✅” button.
           <p class="question">How do I remove stuff?</p>
           To remove an item, press the “🗑” button next to the item you want to remove.
           <p class="question">How do I know if the list has been sent through?</p>
-         If the list has been sent through, it will display the corresponding message for the user: Student: "Order has been requested by students." Matron: “Order has been approved by moderators.” Caterer: “Order has been placed by caterers.”</div>
+          If the list has been sent through, it will display the corresponding message for the user: Student: "Order has been requested by students." Matron: “Order has been approved by moderators.” Caterer: “Order has been placed by caterers.”
+        </div>
       </CollapsibleSection>
       <CollapsibleSection headerText={"Get GroceryApp for Your School"}>
-        <div class="content">Look at all this fun content</div>
+        <div class="content">Please contact us if you would like to get Grocery App for your school. The options for this can be found on the “Contact Us” page.</div>
       </CollapsibleSection>
       <CollapsibleSection headerText={"Language"}>
         <div class="content">
@@ -80,6 +95,37 @@
 
           <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         </div>
+      </CollapsibleSection>
+      <CollapsibleSection headerText={"List Guidelines from Moderators"}>
+        <div class="content">
+          {#await $guidelines}
+            <p>Loading...</p>
+          {:then $guidelines}
+            {#if typeof $guidelines != "undefined"}
+              {#each $guidelines as item, index}
+                <p>
+                  <li>
+                    {item}
+                    {#if $user == "Matron"}
+                      <button
+                        on:click={() => {
+                          deleteGuideline(item, index)
+                        }}>🗑</button
+                      >
+                    {/if}
+                  </li>
+                </p>
+              {/each}
+            {:else}
+              <p>No Guidelines Added</p>
+            {/if}
+          {/await}
+        </div>
+        {#if $user == "Matron"}
+          <p>Edit List Guidelines</p>
+          <input bind:value={newGuideline} />
+          <button class="itemButton" on:click={addGuideline}>✅</button>
+        {/if}
       </CollapsibleSection>
     </section>
   </div>
@@ -115,9 +161,7 @@
     width: 50%;
     padding: 3%;
   }
-  p {
-    padding-top: 5%;
-  }
+
   .content {
     padding: 0.5em;
     font-family: "DM Sans", sans-serif;

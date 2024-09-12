@@ -19,7 +19,7 @@ const app = initializeApp(firebaseConfig)
 const db = getFirestore(app)
 
 import { doc, getDoc, updateDoc, setDoc, arrayUnion, arrayRemove } from "firebase/firestore"
-import { StringFormat, listAll } from "firebase/storage"
+import { StringFormat } from "firebase/storage"
 
 export async function getlistItems() {
   const docRef = doc(db, "list", "24")
@@ -44,6 +44,32 @@ export async function getStatus() {
     // docSnap.data() will be undefined in this case
     console.log("No such document!")
   }
+}
+export async function getGuidelines() {
+  const docRef = doc(db, "guidelines", "rules")
+  const docSnap = await getDoc(docRef)
+
+  if (docSnap.exists()) {
+    const theGuidelines = docSnap.data()
+    return theGuidelines.isReady
+  } else {
+    // docSnap.data() will be undefined in this case
+    console.log("No such document!")
+  }
+}
+
+export async function updateGuidelines(newGuideline) {
+  const docRef = doc(db, "guidelines", "rules")
+
+  await updateDoc(docRef, {
+    guidelines: arrayUnion(newGuideline),
+  })
+}
+export async function removeGuideline(itemToRemove) {
+  const docRef = doc(db, "guidelines", "rules")
+  await updateDoc(docRef, {
+    guidelines: arrayRemove(itemToRemove),
+  })
 }
 
 export async function updateListItems(newItem) {
