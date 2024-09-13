@@ -20,7 +20,7 @@ const db = getFirestore(app)
 
 import { doc, getDoc, updateDoc, setDoc, arrayUnion, arrayRemove } from "firebase/firestore"
 import { StringFormat } from "firebase/storage"
-
+//Function to retrive list from Firebase
 export async function getlistItems() {
   const docRef = doc(db, "list", "24")
   const docSnap = await getDoc(docRef)
@@ -33,6 +33,7 @@ export async function getlistItems() {
     console.log("No such document!")
   }
 }
+//Retrives order status from Firebase
 export async function getStatus() {
   const docRef = doc(db, "list", "24")
   const docSnap = await getDoc(docRef)
@@ -45,33 +46,8 @@ export async function getStatus() {
     console.log("No such document!")
   }
 }
-export async function getGuidelines() {
-  const docRef = doc(db, "guidelines", "rules")
-  const docSnap = await getDoc(docRef)
 
-  if (docSnap.exists()) {
-    const theGuidelines = docSnap.data()
-    return theGuidelines.isReady
-  } else {
-    // docSnap.data() will be undefined in this case
-    console.log("No such document!")
-  }
-}
-
-export async function updateGuidelines(newGuideline) {
-  const docRef = doc(db, "guidelines", "rules")
-
-  await updateDoc(docRef, {
-    guidelines: arrayUnion(newGuideline),
-  })
-}
-export async function removeGuideline(itemToRemove) {
-  const docRef = doc(db, "guidelines", "rules")
-  await updateDoc(docRef, {
-    guidelines: arrayRemove(itemToRemove),
-  })
-}
-
+//Function to add a new item to Firebase List Array
 export async function updateListItems(newItem) {
   const docRef = doc(db, "list", "24")
 
@@ -79,12 +55,14 @@ export async function updateListItems(newItem) {
     list: arrayUnion(newItem),
   })
 }
+//Function to remove an item from Firebase List Array
 export async function removeListItems(itemToRemove) {
   const docRef = doc(db, "list", "24")
   await updateDoc(docRef, {
     list: arrayRemove(itemToRemove),
   })
 }
+//Clears list completely.
 export async function clearList() {
   const docRef = doc(db, "list", "24")
   await updateDoc(docRef, {
@@ -94,22 +72,9 @@ export async function clearList() {
     list: ["gone"],
   })
 }
+//Changes to order status updated to Firebase
 export async function updateStatus(status) {
   await setDoc(doc(db, "list", "24"), {
     isReady: status,
   })
 }
-
-// export async function getlistItems2() {
-//   console.debug('Starting the getList function...')
-//   let listItems = []
-
-//   const listItemsDocs = await getDocs(collection(db, 'list'))
-
-//   listItemsDocs.forEach( (listItemDoc) => {
-//     listItems.push(listItemDoc.data())
-//   })
-
-//   console.debug('Ending the getList function...')
-//     return listItems
-//   }

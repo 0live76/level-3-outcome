@@ -10,7 +10,8 @@
 <div class="columns">
   <Header />
   <div class="column">
-    <h2>Coming Soon</h2>
+    <h2>Forum</h2>
+    <p>Coming Soon</p>
   </div>
 </div>
 <Footer />
@@ -18,5 +19,16 @@
 <style>
   .columns:not(:last-child) {
     margin-bottom: 0;
+  }
+  h2 {
+    font-weight: bold;
+    font-size: 170%;
+    color: #000;
+    margin: 3%;
+  }
+
+  p {
+    font-family: "DM Sans" sans-serif;
+    margin-left: 3%;
   }
 </style>

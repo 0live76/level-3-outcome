@@ -4,29 +4,11 @@
   import Footer from "$lib/Footer.svelte"
   import { isSignedIn } from "$lib/stores"
   import { user } from "$lib/stores"
-  import { guidelines } from "$lib/stores"
-  import { updateGuidelines } from "$lib/db.js"
-  import { removeGuideline } from "$lib/db.js"
   import CollapsibleSection from "$lib/Collapsible.svelte"
   //Signs out user.
   function signOut() {
     $user = "signedOut"
     $isSignedIn = false
-  }
-  //Adds new moderator guidelines.
-  let newGuideline
-  function addGuideline() {
-    if ($guidelines == undefined) {
-      $guidelines = []
-    }
-    console.dir($guidelines)
-    $guidelines = [...$guidelines, newGuideline]
-    updateGuidelines(newGuideline)
-  }
-  function deleteGuideline(item, index) {
-    console.dir($guidelines)
-    $guidelines = [...$guidelines.slice(0, index), ...$guidelines.slice(index + 1)]
-    removeGuideline(item)
   }
 </script>
 
@@ -46,26 +28,26 @@
       <CollapsibleSection headerText={"How to Use the Website"}>
         <div class="content">
           Navigate the website using the menu in the top left. For additional help or information, check the footer at the bottom of every page, or the help page.
-          <img src="navigateHelp.png" alt="" />
+          <img src="navigateHelp.png" alt="Screenshot of website showing navigation located in top left." />
           <div class="columns">
             <p class="column">1. Log in with the correct ID. Are you a Student, Matron/Moderator, or Caterer?</p>
-            <img class="column" src="loginHelp.png" alt="" />
+            <img class="column" src="loginHelp.png" alt="Screenshot of website showing login menu located middle left." />
           </div>
           <div class="columns">
             <p>2. Add an item using the text box input field, then pressing the “ ✅” button.</p>
-            <img src="addItemHelp.png" alt="" />
+            <img src="addItemHelp.png" alt="Screenshot of website showing the tick button." />
           </div>
           <div class="columns">
             <p>3. To remove an item, press the “🗑” button next to the item you want to remove.</p>
-            <img src="removeItemHelp.png" alt="" />
+            <img src="removeItemHelp.png" alt="Screenshot of website showing the trash can button." />
           </div>
           <div class="columns">
             <p>4. To confirm your order, press the green button. To remove all items on the list, press the red “Clear Order” button.</p>
-            <img src="buttonHelp.png" alt="" />
+            <img src="buttonHelp.png" alt="Screenshot of website showing red clear order button and green confirm button." />
           </div>
           <div class="columns">
             <p>5. On mobile, the log out option is located on the help page.</p>
-            <img class="usericon" src="mobileHelp.png" alt="" />
+            <img class="usericon" src="mobileHelp.png" alt="Screenshot of website showing mobile sign out." />
           </div>
         </div>
       </CollapsibleSection>
@@ -78,7 +60,10 @@
           <p class="question">How do I remove stuff?</p>
           To remove an item, press the “🗑” button next to the item you want to remove.
           <p class="question">How do I know if the list has been sent through?</p>
-          If the list has been sent through, it will display the corresponding message for the user: Student: "Order has been requested by students." Matron: “Order has been approved by moderators.” Caterer: “Order has been placed by caterers.”
+          If the list has been sent through, it will display the corresponding message for the user:
+          <p>Student: "Order has been requested by students."</p>
+          <p>Matron: “Order has been approved by moderators.”</p>
+          <p>Caterer: “Order has been placed by caterers.”</p>
         </div>
       </CollapsibleSection>
       <CollapsibleSection headerText={"Get GroceryApp for Your School"}>
@@ -100,34 +85,10 @@
       {#if $isSignedIn == true}
         <CollapsibleSection headerText={"List Guidelines from Moderators"}>
           <div class="content">
-            {#await $guidelines}
-              <p>Loading...</p>
-            {:then $guidelines}
-              {#if typeof $guidelines == "undefined"}
-                <p>No Guidelines Added</p>
-              {:else}
-                {#each $guidelines as item, index}
-                  <p>
-                    <li>
-                      {item}
-                      {#if $user == "Matron"}
-                        <button
-                          on:click={() => {
-                            deleteGuideline(item, index)
-                          }}>🗑</button
-                        >
-                      {/if}
-                    </li>
-                  </p>
-                {/each}
-              {/if}
-            {/await}
+            <p>The purpose of the shopping list is to be used for breakfast foods(rather than dinner).</p>
+            <p>Items such as meat, ice cream, lollies, or biscuits are unlikely to be included, but you can ask a Head Boarder or Mrs Dockrill.</p>
+            <p>There is no limit on the number of items, but keep in mind we are on a budget.</p>
           </div>
-          {#if $user == "Matron"}
-            <p>Edit List Guidelines</p>
-            <input bind:value={newGuideline} />
-            <button class="itemButton" on:click={addGuideline}>✅</button>
-          {/if}
         </CollapsibleSection>
       {/if}
     </section>
@@ -169,7 +130,7 @@
     padding: 0.5em;
     font-family: "DM Sans", sans-serif;
     color: #000;
-    margin-bottom: 3%;
+    margin-bottom: 2%;
   }
   .mobileSignOut {
     visibility: collapse;
@@ -177,6 +138,10 @@
   }
   .usericon {
     width: 25%;
+  }
+  .question {
+    padding-top: 3%;
+    font-weight: bolder;
   }
 
   @media only screen and (max-width: 600px) {
